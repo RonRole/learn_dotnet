@@ -1,2 +1,12 @@
-app:
-  image: mcr.microsoft.com/dotnet/core/sdk:latest
+version: '3'
+services:
+  app:
+    image: mcr.microsoft.com/dotnet/core/sdk:latest
+    volumes: 
+      - ./app:/app
+    ports: 
+      - "5000:5000"
+    command: >
+      sh -c "cd /app && dotnet run --urls="http://0.0.0.0:5000""
+
+    
