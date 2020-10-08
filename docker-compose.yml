@@ -1,0 +1,2 @@
+app:
+  image: mcr.microsoft.com/dotnet/core/sdk:latest
