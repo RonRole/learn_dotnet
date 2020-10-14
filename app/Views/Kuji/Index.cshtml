@@ -1,12 +1,18 @@
+@using System;
+@using System.Linq;
+ 
+
+@model Amidakuji.Models.KujiModel
+
 @{
     ViewData["Title"] = "あみだくじ";
 }
 
-<style>
-    .kuji-container {
-        height: 100px;
-        background-color: #CBFFD3;
-    }
-</style>
 
-<div class="kuji-container"></div>
+<div id="sawai">
+    @Model.Title
+    @foreach (var result in Model.Result)
+    {
+        <p>@result.Item</p>
+    }
+</div>
