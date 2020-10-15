@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Af2zLw5dNVQoND5WZ4QbWvXJbCAS5tHo29WPV+UAeQjBeSgyy3jWLk1NSmhAZAEZq2wDk3IQkRmeX81UtYxvRQ==",
+  "dgSpecHash": "eYm8Z+KPo0h7V9qNwXfau0rnL3RbJsRuNNUY9gZSrzBtjUxNu0eWAjI6T8WdRY6K89O23sNVx1267Bna2EEesg==",
   "success": true,
   "projectFilePath": "/app/app.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/buildbundlerminifier/3.2.449/buildbundlerminifier.3.2.449.nupkg.sha512"
+  ],
   "logs": []
 }

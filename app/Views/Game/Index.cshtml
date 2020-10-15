@@ -1,0 +1,47 @@
+
+
+@using　Game.Models
+@model　Game.Models.Field
+
+@{
+    ViewData["Title"] = "ぷももえん";
+}
+
+<style>    
+    td {
+        height: 10rem;
+        width: 10rem;
+        background-color: green;
+        border: solid 1px black;
+    }
+
+    td.white {
+        height: 10rem;
+        width: 10rem;
+        background-color: white;
+        border: solid 1px black;
+    }
+
+    td:hover {
+        cursor: pointer;
+        opacity: 0.5;
+    }
+</style>
+
+<div id="sawai">
+    <form action="/Game/Index" method="post" name="gameForm">
+        <table>
+            @for (int i = 0; i < GameParameters.FieldSize; i++)
+            {
+                <tr>
+                @for (int j = 0; j < GameParameters.FieldSize; j++)
+                {
+                    <td class="@Model.Pieces[i,j]?.Color" onclick="submitGameForm(@i,@j)">
+                        
+                    </td>
+                }
+                </tr>
+            }
+        </table>
+    </form>
+</div>

@@ -38,3 +38,4 @@
 /app/obj/Debug/netcoreapp3.1/Razor/Views/Movies/Index.cshtml.g.cs
 /app/obj/Debug/netcoreapp3.1/Razor/Views/Movies/Welcome.cshtml.g.cs
 /app/obj/Debug/netcoreapp3.1/Razor/Views/Kuji/Index.cshtml.g.cs
+/app/obj/Debug/netcoreapp3.1/Razor/Views/Game/Index.cshtml.g.cs
