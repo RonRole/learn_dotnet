@@ -1,36 +1,41 @@
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace Game.Models
 {
 
     public static class GameParameters
     {
-        public const int FieldSize = 3;
+        public const int FIELD_SIZE = 12;
     }
 
     public class Field
     {
-        public Piece[,] Pieces {get;} = new Piece[GameParameters.FieldSize, GameParameters.FieldSize];
+        public List<List<Piece>> Pieces{get;set;}
 
         public Field()
         {
-
+            var innerList = new List<Piece>(new Piece[GameParameters.FIELD_SIZE]);
+            Pieces = new List<List<Piece>>(Enumerable.Repeat(innerList, GameParameters.FIELD_SIZE));
         }
 
-        public void addPiece(Piece piece)
+        public void AddPiece(Piece piece)
         {
-            Pieces[piece.Y,piece.X] = piece;
+            Pieces[piece.Y][piece.X] = piece;
         }
     }
 
     public class Piece
     {
-        [Range(0,GameParameters.FieldSize-1, ErrorMessage="正しい数字を入力してください")]
-        public int X {get;}
-        [Range(0,GameParameters.FieldSize-1, ErrorMessage="正しい数字を入力してください")]
-        public int Y {get;}
+        [Range(0,GameParameters.FIELD_SIZE-1, ErrorMessage="正しい数字を入力してください")]
+        public int X {get;set;}
+        [Range(0,GameParameters.FIELD_SIZE-1, ErrorMessage="正しい数字を入力してください")]
+        public int Y {get;set;}
 
-        public int ColorNum {get;}
+        public int ColorNum {get;set;}
 
         public string Color {
             get {
@@ -52,7 +57,7 @@ namespace Game.Models
             this.ColorNum = colorNum;
         }
 
-        public Piece flip()
+        public Piece Flip()
         {
             return new Piece(X, Y, -ColorNum);
         }
