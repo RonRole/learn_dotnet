@@ -14,22 +14,27 @@ namespace Game.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new Field();
-            HttpContext.Session.SetObject<Field>("field", model);
-            HttpContext.Session.SetInt32("turn", 1);
+            var model = Field.Initial();
+            saveField(model);
+            saveTurn(1);
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Index(int x, int y)
         {
-            var colorNum = HttpContext.Session.GetInt32("turn") ?? default(int);
+            var colorNum = loadTurn();
             var piece = new Piece(x, y, colorNum);
-            var model = HttpContext.Session.GetObject<Field>("field");
+            var model = loadField();
             model.AddPiece(piece);
-            HttpContext.Session.SetObject<Field>("field",model);
-            HttpContext.Session.SetInt32("turn", -1*colorNum);
+            saveField(model);
+            saveTurn(colorNum*-1);
             return View(model);
         }
+
+        private void saveField(Field field)=>HttpContext.Session.SetObject<Field>("field", field);
+        private void saveTurn(int turn)=>HttpContext.Session.SetInt32("turn", turn);
+        private Field loadField()=>HttpContext.Session.GetObject<Field>("field");
+        private int loadTurn()=>HttpContext.Session.GetInt32("turn") ?? default(int);
     }
 }
