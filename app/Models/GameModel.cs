@@ -32,20 +32,21 @@ namespace Game.Models
         public void AddPiece(int row = 0, int col = 0, int colorNum = 0)
         {
             Pieces[row][col].Colored(colorNum);
+            leftSideSetable(row, col, colorNum);
         }
 
         public void FlipPiece(int row, int col, int colorNum)
         {
             //左側
-
         }
 
         private bool leftSideSetable(int row, int col, int colorNum)
         {
-            if(col == 0)
-            {
-                return false;
-            }
+            var closestPiece = Pieces[row].Where(item=>Pieces[row].IndexOf(item) < col)
+                                            .Where(item=>item.isColorOf(colorNum))
+                                            .LastOrDefault();
+            Console.WriteLine(Pieces[row].IndexOf(closestPiece));
+            return false;
         } 
     }
 
@@ -82,9 +83,9 @@ namespace Game.Models
         {
             this.ColorNum = this.ColorNum*-1;
         }
-        public bool SameColorTo(Piece piece)
+        public bool isColorOf(int colorNum)
         {
-            return this.ColorNum == piece.ColorNum;
+            return this.ColorNum == colorNum;
         }
     }
 }
