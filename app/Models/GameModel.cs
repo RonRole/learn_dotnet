@@ -15,50 +15,42 @@ namespace Game.Models
     {
         public List<List<Piece>> Pieces{get;set;}
         public delegate void FlipPieces(List<List<Piece>> previousPieces, Piece newPiece);
-        public static Field Initial()
-        {
-            var initialField = new Field();
-            var initialPieces = new List<Piece> {
-                new Piece(3,3,1), 
-                new Piece(4,4,1), 
-                new Piece(3,4,-1), 
-                new Piece(4,3,-1)
-            };
-            foreach(var piece in initialPieces)
-            {
-                initialField.AddPiece(piece);
-            }
-            return initialField;
-        }
 
-        private Field()
+        public Field()
         {
             Pieces = new List<List<Piece>>();
             foreach(var time in Enumerable.Range(0, GameParameters.FIELD_SIZE))
             {
-                Pieces.Add(new List<Piece>(new Piece[GameParameters.FIELD_SIZE]));
+                Pieces.Add(Enumerable.Repeat(0, GameParameters.FIELD_SIZE).Select(i=>new Piece(0)).ToList());
             }
+            AddPiece(3,3,1);
+            AddPiece(4,4,1);
+            AddPiece(3,4,-1);
+            AddPiece(4,3,-1);
         }
 
-        public void AddPiece(Piece piece)
+        public void AddPiece(int row = 0, int col = 0, int colorNum = 0)
         {
-            FlipPieces flipPieces = new UpSideFlipper();
-            flipPieces += new UpRightSideFlipper();
+            Pieces[row][col].Colored(colorNum);
         }
 
-        private int closestLeftIndex(Piece piece)=>
-            Enumerable.Range(0,Math.Max(0, piece.X))
-                        .Where(i=>Pieces[piece.Y][i]?.ColorNum == piece.ColorNum)
-                        .LastOrDefault();
+        public void FlipPiece(int row, int col, int colorNum)
+        {
+            //左側
+
+        }
+
+        private bool leftSideSetable(int row, int col, int colorNum)
+        {
+            if(col == 0)
+            {
+                return false;
+            }
+        } 
     }
 
     public class Piece
     {
-        [Range(0,GameParameters.FIELD_SIZE-1, ErrorMessage="正しい数字を入力してください")]
-        public int X {get;set;}
-        [Range(0,GameParameters.FIELD_SIZE-1, ErrorMessage="正しい数字を入力してください")]
-        public int Y {get;set;}
-
         public int ColorNum {get;set;}
 
         public string Color {
@@ -74,16 +66,25 @@ namespace Game.Models
         }
         protected Piece() {}
 
-        public Piece(int x, int y, int colorNum=0)
+        public Piece(int colorNum=0)
         {
-            this.X = x;
-            this.Y = y;
             this.ColorNum = colorNum;
         }
 
+        public void Colored(int colorNum=0)
+        {
+            if(this.ColorNum == 0)
+            {
+                this.ColorNum = colorNum;
+            }
+        }
         public void Flip()
         {
             this.ColorNum = this.ColorNum*-1;
+        }
+        public bool SameColorTo(Piece piece)
+        {
+            return this.ColorNum == piece.ColorNum;
         }
     }
 }

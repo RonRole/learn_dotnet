@@ -37,7 +37,7 @@
                 <tr>
                 @for (int j = 0; j < GameParameters.FIELD_SIZE; j++)
                 {
-                    <td class="@Model.Pieces[i][j]?.Color" onclick="submitGameForm(@i,@j)">
+                    <td class="@Model.Pieces[i][j].Color" onclick="submitGameForm(@i,@j)">
                         
                     </td>
                 }

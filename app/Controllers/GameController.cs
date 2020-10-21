@@ -14,19 +14,18 @@ namespace Game.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = Field.Initial();
+            var model = new Field();
             saveField(model);
             saveTurn(1);
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Index(int x, int y)
+        public IActionResult Index(int row, int col)
         {
             var colorNum = loadTurn();
-            var piece = new Piece(x, y, colorNum);
             var model = loadField();
-            model.AddPiece(piece);
+            model.AddPiece(row, col, colorNum);
             saveField(model);
             saveTurn(colorNum*-1);
             return View(model);
