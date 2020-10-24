@@ -5,7 +5,7 @@ namespace Game.Models
 
     public static class GameParameters
     {
-        public const int FieldSize = 3;
+        public const int FieldSize = 12;
     }
 
     public class Field
