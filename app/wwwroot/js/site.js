@@ -5,11 +5,11 @@
 const submitGameForm = (row,col) => {
     const gameForm = document.forms.gameForm
     const xInput = document.createElement('input')
-    xInput.name = 'x'
+    xInput.name = 'col'
     xInput.type = 'hidden'
     xInput.value = col
     const yInput = document.createElement('input')
-    yInput.name = 'y'
+    yInput.name = 'row'
     yInput.type = 'hidden'
     yInput.value = row
     gameForm.appendChild(xInput)

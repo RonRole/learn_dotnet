@@ -1,36 +1,58 @@
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace Game.Models
 {
-
     public static class GameParameters
     {
-        public const int FieldSize = 12;
+        public const int FIELD_SIZE = 8;
     }
 
     public class Field
     {
-        public Piece[,] Pieces {get;} = new Piece[GameParameters.FieldSize, GameParameters.FieldSize];
+        public List<List<Piece>> Pieces{get;set;}
+        public delegate void FlipPieces(List<List<Piece>> previousPieces, Piece newPiece);
 
         public Field()
         {
-
+            Pieces = new List<List<Piece>>();
+            foreach(var time in Enumerable.Range(0, GameParameters.FIELD_SIZE))
+            {
+                Pieces.Add(Enumerable.Repeat(0, GameParameters.FIELD_SIZE).Select(i=>new Piece(0)).ToList());
+            }
+            AddPiece(3,3,1);
+            AddPiece(4,4,1);
+            AddPiece(3,4,-1);
+            AddPiece(4,3,-1);
         }
 
-        public void addPiece(Piece piece)
+        public void AddPiece(int row = 0, int col = 0, int colorNum = 0)
         {
-            Pieces[piece.Y,piece.X] = piece;
+            Pieces[row][col].Colored(colorNum);
+            leftSideSetable(row, col, colorNum);
         }
+
+        public void FlipPiece(int row, int col, int colorNum)
+        {
+            //左側
+        }
+
+        private bool leftSideSetable(int row, int col, int colorNum)
+        {
+            var closestPiece = Pieces[row].Where(item=>Pieces[row].IndexOf(item) < col)
+                                            .Where(item=>item.isColorOf(colorNum))
+                                            .LastOrDefault();
+            Console.WriteLine(Pieces[row].IndexOf(closestPiece));
+            return false;
+        } 
     }
 
     public class Piece
     {
-        [Range(0,GameParameters.FieldSize-1, ErrorMessage="正しい数字を入力してください")]
-        public int X {get;}
-        [Range(0,GameParameters.FieldSize-1, ErrorMessage="正しい数字を入力してください")]
-        public int Y {get;}
-
-        public int ColorNum {get;}
+        public int ColorNum {get;set;}
 
         public string Color {
             get {
@@ -45,16 +67,25 @@ namespace Game.Models
         }
         protected Piece() {}
 
-        public Piece(int x, int y, int colorNum=0)
+        public Piece(int colorNum=0)
         {
-            this.X = x;
-            this.Y = y;
             this.ColorNum = colorNum;
         }
 
-        public Piece flip()
+        public void Colored(int colorNum=0)
         {
-            return new Piece(X, Y, -ColorNum);
+            if(this.ColorNum == 0)
+            {
+                this.ColorNum = colorNum;
+            }
+        }
+        public void Flip()
+        {
+            this.ColorNum = this.ColorNum*-1;
+        }
+        public bool isColorOf(int colorNum)
+        {
+            return this.ColorNum == colorNum;
         }
     }
 }

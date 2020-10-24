@@ -39,6 +39,18 @@
             "BuildBundlerMinifier": {
               "target": "Package",
               "version": "[3.2.449, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.1.9, )"
             }
           },
           "imports": [

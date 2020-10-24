@@ -9,15 +9,18 @@
 
 <style>    
     td {
-        height:3rem;
-        width:3rem;
+        height: 5rem;
+        width: 5rem;
         background-color: green;
         border: solid 1px black;
     }
 
     td.white {
         background-color: white;
-        border: solid 1px black;
+    }
+
+    td.black {
+        background-color: black;
     }
 
     td:hover {
@@ -29,12 +32,12 @@
 <div id="sawai">
     <form action="/Game/Index" method="post" name="gameForm">
         <table>
-            @for (int i = 0; i < GameParameters.FieldSize; i++)
+            @for (int i = 0; i < GameParameters.FIELD_SIZE; i++)
             {
                 <tr>
-                @for (int j = 0; j < GameParameters.FieldSize; j++)
+                @for (int j = 0; j < GameParameters.FIELD_SIZE; j++)
                 {
-                    <td class="@Model.Pieces[i,j]?.Color" onclick="submitGameForm(@i,@j)">
+                    <td class="@Model.Pieces[i][j].Color" onclick="submitGameForm(@i,@j)">
                         
                     </td>
                 }
