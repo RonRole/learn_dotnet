@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "eqVJP11KI2od4CRyS32s2PcjszYJ0Blg7LJTxcYAFm/B4PdmjUpfz/wN+p5CJzP+RYTTXEYKk9sTZAaQNqw7QA==",
-=======
-  "dgSpecHash": "gaqXoB3mSn5VAaJZLAgk4OLnwuqESjTjjSN39m5dMVEHhh6qxxpnhSU/Cbr97Luv4f/vjnZDUE7GeEKR4lcBqA==",
->>>>>>> 6e1c7d9f7115f7b831e191a6b0ad681ea8c1ccda
+  "dgSpecHash": "nTYZtyGU3bTLe8rTCt7psgDyarJrpUW6iTYvj4R14uy5cUUerSlDUF3DXekVnNaZjveXalldZXjwJW653dea4g==",
   "success": true,
   "projectFilePath": "/app/app.csproj",
   "expectedPackageFiles": [
@@ -44,5 +40,12 @@
     "/root/.nuget/packages/system.security.principal.windows/4.5.0/system.security.principal.windows.4.5.0.nupkg.sha512",
     "/root/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /app/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
